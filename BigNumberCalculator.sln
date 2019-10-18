@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculator", "BigNumberCalculator\BigNumberCalculator.csproj", "{6A00567E-14F7-437C-965A-76E0090F4044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculator", "BigNumberCalculator\BigNumberCalculator.csproj", "{6A00567E-14F7-437C-965A-76E0090F4044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculatorRepository", "BigNumberCalculatorRepository\BigNumberCalculatorRepository.csproj", "{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculatorService", "BigNumberCalculatorService\BigNumberCalculatorService.csproj", "{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6A00567E-14F7-437C-965A-76E0090F4044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A00567E-14F7-437C-965A-76E0090F4044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A00567E-14F7-437C-965A-76E0090F4044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,3 +1,5 @@
 .vs/
 BigNumberCalculator/bin/
 BigNumberCalculator/obj/
+BigNumberCalculatorRepository/obj/
+BigNumberCalculatorService/obj/
