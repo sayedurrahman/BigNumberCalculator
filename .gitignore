@@ -3,3 +3,7 @@ BigNumberCalculator/bin/
 BigNumberCalculator/obj/
 BigNumberCalculatorRepository/obj/
 BigNumberCalculatorService/obj/
+BigNumberCalculatorRepository/bin/
+BigNumberCalculatorService/bin/
+BigNumberCalculatorTest/bin/
+BigNumberCalculatorTest/obj/

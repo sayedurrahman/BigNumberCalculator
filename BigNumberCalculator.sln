@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculatorReposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculatorService", "BigNumberCalculatorService\BigNumberCalculatorService.csproj", "{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculatorTest", "BigNumberCalculatorTest\BigNumberCalculatorTest.csproj", "{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
