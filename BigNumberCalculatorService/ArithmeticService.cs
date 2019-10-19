@@ -7,42 +7,6 @@ namespace BigNumberCalculatorService
 {
     public class ArithmeticService : IArithmeticService
     {
-        public string AdditionOfFractionalPart(List<int> firstArray, List<int> secondArray)
-        {
-            /*
-             * add zeros at the end in the smaller list (if list are not in same size) to create same size list
-             * Use list.zip function to add digits
-             * 
-             * e.g.
-             * x.12545 + y.345 = x.12545 + y.34500
-             * input: 12545 and 345
-             * 12545
-             * 34500
-             * ------
-             * 47045
-             * */
-
-            if (firstArray.Count > secondArray.Count)
-            {
-                List<int> tempList = new List<int>(firstArray.Count - secondArray.Count) { 0 };
-                secondArray.AddRange(tempList);
-            }
-            else if (firstArray.Count < secondArray.Count)
-            {
-                List<int> tempList = new List<int>(secondArray.Count - firstArray.Count) { 0 };
-                firstArray.AddRange(tempList);
-            }
-
-            firstArray.Reverse();
-            secondArray.Reverse();
-            // we have to reverse both array because list.zip works from left to right
-
-            int carry = 0;
-            List<int> result = firstArray.Zip(secondArray, (i, j) => DigitSum(i, j, ref carry)).ToList();
-            result.Reverse();
-            return ListIntToString(result);
-        }
-
         public string AdditionOfIntegralPart(List<int> firstArray, List<int> secondArray, int carry)
         {
             /*
@@ -60,13 +24,17 @@ namespace BigNumberCalculatorService
 
             if (firstArray.Count > secondArray.Count)
             {
-                List<int> tempList = new List<int>(firstArray.Count - secondArray.Count) { 0 };
-                secondArray.InsertRange(0, tempList);
+                foreach (var i in Enumerable.Range(0, firstArray.Count - secondArray.Count))
+                {
+                    secondArray.Insert(0, 0);
+                }
             }
             else if (firstArray.Count < secondArray.Count)
             {
-                List<int> tempList = new List<int>(secondArray.Count - firstArray.Count) { 0 };
-                firstArray.InsertRange(0, tempList);
+                foreach (var i in Enumerable.Range(0, secondArray.Count - firstArray.Count))
+                {
+                    firstArray.Insert(0, 0);
+                }
             }
 
             firstArray.Reverse();
@@ -74,7 +42,53 @@ namespace BigNumberCalculatorService
             // we have to reverse both array because list.zip works from left to right
 
             List<int> result = firstArray.Zip(secondArray, (i, j) => DigitSum(i, j, ref carry)).ToList();
+
+            // we should add carry, if carry is greater than zero
+            if (carry > 0)
+                result.Add(carry);
+
             result.Reverse();
+            return ListIntToString(result);
+        }
+
+        public string AdditionOfFractionalPart(List<int> firstArray, List<int> secondArray, out int carry)
+        {
+            /*
+             * add zeros at the end in the smaller list (if list are not in same size) to create same size list
+             * Use list.zip function to add digits
+             * 
+             * e.g.
+             * x.12545 + y.345 = x.12545 + y.34500
+             * input: 12545 and 345
+             * 12545
+             * 34500
+             * ------
+             * 47045
+             * */
+
+            if (firstArray.Count > secondArray.Count)
+            {
+                foreach (var i in Enumerable.Range(0, firstArray.Count - secondArray.Count))
+                {
+                    secondArray.Add(0);
+                }
+            }
+            else if (firstArray.Count < secondArray.Count)
+            {
+                foreach (var i in Enumerable.Range(0, secondArray.Count - firstArray.Count))
+                {
+                    firstArray.Add(0);
+                }
+            }
+
+            firstArray.Reverse();
+            secondArray.Reverse();
+            // we have to reverse both array because list.zip works from left to right
+
+            int localCarry = 0;
+            List<int> result = firstArray.Zip(secondArray, (i, j) => DigitSum(i, j, ref localCarry)).ToList();
+            result.Reverse();
+            carry = localCarry;
             return ListIntToString(result);
         }
 
@@ -91,7 +105,5 @@ namespace BigNumberCalculatorService
             input.ForEach(x => sb.Append(x.ToString()));
             return sb.ToString();
         }
-
-        
     }
 }
