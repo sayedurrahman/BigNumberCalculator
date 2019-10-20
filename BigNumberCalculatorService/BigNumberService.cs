@@ -5,10 +5,10 @@ using System.Text;
 
 namespace BigNumberCalculatorService
 {
-    public class BigNumberCalculatorService: IBigNumberCalculatorService
+    public class BigNumberService: IBigNumberService
     {
         private readonly IArithmeticService arithmeticService;
-        public BigNumberCalculatorService(IArithmeticService arithmeticService)
+        public BigNumberService(IArithmeticService arithmeticService)
         {
             this.arithmeticService = arithmeticService;
         }

@@ -13,7 +13,7 @@ namespace BigNumberCalculatorTest
         [MemberData(nameof(DataMix))]
         public void DoSumTest(string firstNumber, string secondNumber, string result)
         {
-            string actualResult = TestHelper.BigNumberCalculatorService.DoSum(firstNumber, secondNumber);
+            string actualResult = TestHelper.BigNumberService.DoSum(firstNumber, secondNumber);
             Assert.Equal(result, actualResult);
         }
 

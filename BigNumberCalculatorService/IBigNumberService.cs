@@ -1,6 +1,6 @@
 ﻿namespace BigNumberCalculatorService
 {
-    public interface IBigNumberCalculatorService
+    public interface IBigNumberService
     {
         string DoSum(string firstNumber, string secondNumber);
     }
