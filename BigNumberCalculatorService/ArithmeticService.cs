@@ -7,7 +7,7 @@ namespace BigNumberCalculatorService
 {
     public class ArithmeticService : IArithmeticService
     {
-        public string AdditionOfIntegralPart(List<int> firstArray, List<int> secondArray, int carry)
+        public List<int> AdditionOfIntegralPart(List<int> firstList, List<int> secondList, ref int carry)
         {
             /*
              * add zeros at the beginning in the smaller arrar (if arrays are not in same size) to crate same size array
@@ -22,36 +22,35 @@ namespace BigNumberCalculatorService
              * 13090
              * */
 
-            if (firstArray.Count > secondArray.Count)
+            if (firstList.Count > secondList.Count)
             {
-                foreach (var i in Enumerable.Range(0, firstArray.Count - secondArray.Count))
+                foreach (var i in Enumerable.Range(0, firstList.Count - secondList.Count))
                 {
-                    secondArray.Insert(0, 0);
+                    secondList.Insert(0, 0);
                 }
             }
-            else if (firstArray.Count < secondArray.Count)
+            else if (firstList.Count < secondList.Count)
             {
-                foreach (var i in Enumerable.Range(0, secondArray.Count - firstArray.Count))
+                foreach (var i in Enumerable.Range(0, secondList.Count - firstList.Count))
                 {
-                    firstArray.Insert(0, 0);
+                    firstList.Insert(0, 0);
                 }
             }
 
-            firstArray.Reverse();
-            secondArray.Reverse();
+            firstList.Reverse();
+            secondList.Reverse();
             // we have to reverse both array because list.zip works from left to right
 
-            List<int> result = firstArray.Zip(secondArray, (i, j) => DigitSum(i, j, ref carry)).ToList();
-
-            // we should add carry, if carry is greater than zero
-            if (carry > 0)
-                result.Add(carry);
-
+            // can not use same ref carry in to another ref carry. compile error. so using local variable
+            int localCarry = carry;
+            List<int> result = firstList.Zip(secondList, (i, j) => DigitSum(i, j, ref localCarry)).ToList();
             result.Reverse();
-            return ListIntToString(result);
+
+            carry = localCarry;
+            return result;
         }
 
-        public string AdditionOfFractionalPart(List<int> firstArray, List<int> secondArray, out int carry)
+        public List<int> AdditionOfFractionalPart(List<int> firstList, List<int> secondList, ref int carry)
         {
             /*
              * add zeros at the end in the smaller list (if list are not in same size) to create same size list
@@ -66,30 +65,45 @@ namespace BigNumberCalculatorService
              * 47045
              * */
 
-            if (firstArray.Count > secondArray.Count)
+            if (firstList.Count > secondList.Count)
             {
-                foreach (var i in Enumerable.Range(0, firstArray.Count - secondArray.Count))
+                foreach (var i in Enumerable.Range(0, firstList.Count - secondList.Count))
                 {
-                    secondArray.Add(0);
+                    secondList.Add(0);
                 }
             }
-            else if (firstArray.Count < secondArray.Count)
+            else if (firstList.Count < secondList.Count)
             {
-                foreach (var i in Enumerable.Range(0, secondArray.Count - firstArray.Count))
+                foreach (var i in Enumerable.Range(0, secondList.Count - firstList.Count))
                 {
-                    firstArray.Add(0);
+                    firstList.Add(0);
                 }
             }
 
-            firstArray.Reverse();
-            secondArray.Reverse();
+            firstList.Reverse();
+            secondList.Reverse();
             // we have to reverse both array because list.zip works from left to right
 
+            // can not use same ref carry in to another ref carry. compile error. so using local variable
             int localCarry = 0;
-            List<int> result = firstArray.Zip(secondArray, (i, j) => DigitSum(i, j, ref localCarry)).ToList();
+            List<int> result = firstList.Zip(secondList, (i, j) => DigitSum(i, j, ref localCarry)).ToList();
             result.Reverse();
             carry = localCarry;
-            return ListIntToString(result);
+            return result;
+        }
+
+        public List<int> DoNinesComplement(List<int> input)
+        {
+            List<int> ninesComplement = new List<int>();
+            input.ForEach(x => ninesComplement.Add(9 - x));
+            return ninesComplement;
+        }
+
+        public string ListIntToString(List<int> input)
+        {
+            StringBuilder sb = new StringBuilder();
+            input.ForEach(x => sb.Append(x.ToString()));
+            return sb.ToString();
         }
 
         private int DigitSum(int i, int j, ref int carry)
@@ -97,13 +111,6 @@ namespace BigNumberCalculatorService
             int sum = i + j + carry;
             carry = sum / 10;
             return sum % 10;
-        }
-
-        private string ListIntToString(List<int> input)
-        {
-            StringBuilder sb = new StringBuilder();
-            input.ForEach(x => sb.Append(x.ToString()));
-            return sb.ToString();
         }
     }
 }
