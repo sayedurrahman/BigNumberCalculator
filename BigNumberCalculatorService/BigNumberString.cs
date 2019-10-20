@@ -24,12 +24,12 @@ namespace BigNumberCalculatorService
 
             if (numberSegment.Length > 0)
             {
-                IntegralPartDigitList = numberSegment[0].Select(x => (int)x).ToList();
+                IntegralPartDigitList = numberSegment[0].Select(x => int.Parse(x.ToString())).ToList();
             }
 
             if (numberSegment.Length > 1)
             {
-                FractionalPartDigitList = numberSegment[1].Select(x => (int)x).ToList();
+                FractionalPartDigitList = numberSegment[1].Select(x => int.Parse(x.ToString())).ToList();
             }
         }
 
