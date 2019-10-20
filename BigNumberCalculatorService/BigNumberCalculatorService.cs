@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BigNumberCalculatorService
 {
-    public class BigNumberCalculatorService//: IBigNumberCalculatorService
+    public class BigNumberCalculatorService: IBigNumberCalculatorService
     {
         private readonly IArithmeticService arithmeticService;
         public BigNumberCalculatorService(IArithmeticService arithmeticService)
@@ -27,7 +28,7 @@ namespace BigNumberCalculatorService
                 // means both are negative
                 result = DoSumTwoNegativeNumber(firstBigNumberString, secondBigNumberString);
             }
-            else if (!(firstBigNumberString.IsNegative && secondBigNumberString.IsNegative))
+            else if (!firstBigNumberString.IsNegative && !secondBigNumberString.IsNegative)
             {
                 // means both are positive
                 result = DoSumTwoPositiveNumber(firstBigNumberString, secondBigNumberString);
@@ -40,6 +41,9 @@ namespace BigNumberCalculatorService
                 else
                     result = DoSumOnePositiveOneNegativeNumber(firstBigNumberString, secondBigNumberString);
             }
+
+            if (string.IsNullOrWhiteSpace(result) || result == "-")
+                result = "0";
 
             return result;
         }
@@ -83,6 +87,27 @@ namespace BigNumberCalculatorService
             int carry = 0;
             string fractionString = string.Empty;
 
+            // before we do 9's complement of negative number we must check if it has digit equals to or greater then positive counter part
+            // else it end up wrong answer
+            // if it is fractional add zero at end
+            // if it is integral add zero at beginning
+            if (positiveNumberString.FractionalPartDigitList.Count> negativeNumberString.FractionalPartDigitList.Count)
+            {
+                foreach (var i in Enumerable.Range(0, positiveNumberString.FractionalPartDigitList.Count - negativeNumberString.FractionalPartDigitList.Count))
+                {
+                    negativeNumberString.FractionalPartDigitList.Add(0);
+                }
+            }
+
+            if (positiveNumberString.IntegralPartDigitList.Count > negativeNumberString.IntegralPartDigitList.Count)
+            {
+                foreach (var i in Enumerable.Range(0, positiveNumberString.IntegralPartDigitList.Count - negativeNumberString.IntegralPartDigitList.Count))
+                {
+                    negativeNumberString.IntegralPartDigitList.Insert(0, 0);
+                }
+
+            }
+
             // 9's complement
             var ncOfFraction = arithmeticService.DoNinesComplement(negativeNumberString.FractionalPartDigitList);
             var ncOfIntegral = arithmeticService.DoNinesComplement(negativeNumberString.IntegralPartDigitList);
@@ -98,9 +123,9 @@ namespace BigNumberCalculatorService
 
                 integral = arithmeticService.AdditionOfIntegralPart(integral, new List<int>(), ref carry);
                 if (fraction.Count > 0)
-                    fractionString = "." + arithmeticService.ListIntToString(fraction);
+                    fractionString = "." + arithmeticService.ListIntToString(fraction).TrimEnd('0');
 
-                return arithmeticService.ListIntToString(integral) + fractionString;
+                return arithmeticService.ListIntToString(integral).TrimStart('0') + fractionString;
             }
             else
             {
@@ -109,9 +134,9 @@ namespace BigNumberCalculatorService
                 ncOfFraction = arithmeticService.DoNinesComplement(fraction);
                 ncOfIntegral = arithmeticService.DoNinesComplement(integral);
                 if (ncOfFraction.Count > 0)
-                    fractionString = "." + arithmeticService.ListIntToString(ncOfFraction);
+                    fractionString = "." + arithmeticService.ListIntToString(ncOfFraction).TrimEnd('0');
 
-                return "-" + arithmeticService.ListIntToString(ncOfIntegral) + fractionString;
+                return "-" + arithmeticService.ListIntToString(ncOfIntegral).TrimStart('0') + fractionString;
 
             }
         }
