@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BigNumberCalculator.Core;
+using BigNumberCalculator.Core.ArithmeticOparationService;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +24,8 @@ namespace BigNumberCalculator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<BigNumberCalculatorService.IArithmeticService, BigNumberCalculatorService.ArithmeticService>();
-            services.AddScoped<BigNumberCalculatorService.IBigNumberService, BigNumberCalculatorService.BigNumberService>();
+            services.AddScoped<IArithmeticService, ArithmeticService>();
+            services.AddScoped<ICoreService, CoreService>();
 
             // Setup connection string and configure for all pc/host
             string connectionString = Configuration.GetConnectionString("DefaultConnection").Replace("%CONTENTROOTPATH%", _contentRootPath);

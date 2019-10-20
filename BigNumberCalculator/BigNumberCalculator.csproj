@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BigNumberCalculatorService\BigNumberCalculatorService.csproj" />
+    <ProjectReference Include="..\BigNumberCalculatorService\BigNumberCalculator.Core.csproj" />
   </ItemGroup>
 
 </Project>

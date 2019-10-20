@@ -1,25 +1,21 @@
-﻿using BigNumberCalculator.Core;
-using BigNumberCalculator.Core.ArithmeticOparationService;
+﻿using BigNumberCalculator.Core.ArithmeticOparationService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigNumberCalculatorTest
+namespace BigNumberCalculator.Core.SummationService
 {
-    public static class TestHelper
+    public static class SummationHelper
     {
         public readonly static IArithmeticService ArithmeticService;
-        public readonly static ICoreService CoreService;
-        static TestHelper()
+        static SummationHelper()
         {
             var services = new ServiceCollection();
             services.AddSingleton<IArithmeticService, ArithmeticService>();
-            services.AddSingleton<ICoreService, CoreService>();
 
             var serviceProvider = services.BuildServiceProvider();
             ArithmeticService = serviceProvider.GetService<IArithmeticService>();
-            CoreService = serviceProvider.GetService<ICoreService>();
         }
     }
 }

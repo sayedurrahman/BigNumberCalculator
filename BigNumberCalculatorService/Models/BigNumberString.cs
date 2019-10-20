@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigNumberCalculatorService
+namespace BigNumberCalculator.Core.Models
 {
     /// <summary>
     /// This class represents a very large number

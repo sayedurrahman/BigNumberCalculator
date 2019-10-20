@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BigNumberCalculatorRepository\BigNumberCalculatorRepository.csproj" />
+    <ProjectReference Include="..\BigNumberCalculatorRepository\BigNumberCalculator.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BigNumberCalculator.Core.SummationService;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
@@ -13,7 +14,7 @@ namespace BigNumberCalculatorTest
         [MemberData(nameof(DataMix))]
         public void DoSumTest(string firstNumber, string secondNumber, string result)
         {
-            string actualResult = TestHelper.BigNumberService.DoSum(firstNumber, secondNumber);
+            string actualResult = TestHelper.CoreService.CalculateSum(firstNumber, secondNumber);
             Assert.Equal(result, actualResult);
         }
 

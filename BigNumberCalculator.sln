@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculator", "BigNumberCalculator\BigNumberCalculator.csproj", "{6A00567E-14F7-437C-965A-76E0090F4044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculatorRepository", "BigNumberCalculatorRepository\BigNumberCalculatorRepository.csproj", "{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculator.Repository", "BigNumberCalculatorRepository\BigNumberCalculator.Repository.csproj", "{E6F5F2A2-BA99-405D-87A5-3F3CE980E954}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculatorService", "BigNumberCalculatorService\BigNumberCalculatorService.csproj", "{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculator.Core", "BigNumberCalculatorService\BigNumberCalculator.Core.csproj", "{B202AB6B-8F6F-4ECB-8831-78C5059C7B86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigNumberCalculatorTest", "BigNumberCalculatorTest\BigNumberCalculatorTest.csproj", "{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigNumberCalculator.Test", "BigNumberCalculatorTest\BigNumberCalculator.Test.csproj", "{C0F73FEA-2827-47A7-AFE2-8FA5BF5DC8DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

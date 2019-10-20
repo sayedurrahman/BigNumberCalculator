@@ -2,78 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BigNumberCalculator.Core.ArithmeticOparationService;
+using BigNumberCalculator.Core.Models;
 
-namespace BigNumberCalculatorService
+namespace BigNumberCalculator.Core.SummationService
 {
-    public class BigNumberService: IBigNumberService
+    public class OnePositiveOneNegativeNumberService : ITwoNumberSummation
     {
         private readonly IArithmeticService arithmeticService;
-        public BigNumberService(IArithmeticService arithmeticService)
+        public OnePositiveOneNegativeNumberService()
         {
-            this.arithmeticService = arithmeticService;
+            arithmeticService = SummationHelper.ArithmeticService;
         }
-
-        public string DoSum(string firstNumber, string secondNumber)
-        {
-            var firstBigNumberString = new BigNumberString(firstNumber);
-            var secondBigNumberString = new BigNumberString(secondNumber);
-            return DoTheMath(firstBigNumberString, secondBigNumberString);
-        }
-
-        private string DoTheMath(BigNumberString firstBigNumberString, BigNumberString secondBigNumberString)
-        {
-            string result = string.Empty;
-            if (firstBigNumberString.IsNegative && secondBigNumberString.IsNegative)
-            {
-                // means both are negative
-                result = DoSumTwoNegativeNumber(firstBigNumberString, secondBigNumberString);
-            }
-            else if (!firstBigNumberString.IsNegative && !secondBigNumberString.IsNegative)
-            {
-                // means both are positive
-                result = DoSumTwoPositiveNumber(firstBigNumberString, secondBigNumberString);
-            }
-            else
-            {
-                // one is positive one is negative
-                if (firstBigNumberString.IsNegative)
-                    result = DoSumOnePositiveOneNegativeNumber(secondBigNumberString, firstBigNumberString);
-                else
-                    result = DoSumOnePositiveOneNegativeNumber(firstBigNumberString, secondBigNumberString);
-            }
-
-            if (string.IsNullOrWhiteSpace(result) || result == "-")
-                result = "0";
-
-            return result;
-        }
-
-        private string DoSumTwoPositiveNumber(BigNumberString firstNumberString, BigNumberString secondNumberString)
-        {
-            int carry = 0;
-            string fractionString = string.Empty;
-            List<int> fraction = arithmeticService.AdditionOfFractionalPart(firstNumberString.FractionalPartDigitList, secondNumberString.FractionalPartDigitList, ref carry);
-            List<int> integral = arithmeticService.AdditionOfIntegralPart(firstNumberString.IntegralPartDigitList, secondNumberString.IntegralPartDigitList, ref carry);
-
-            // we should add carry, if carry is greater than zero
-            if (carry > 0)
-                integral.Insert(0, carry);
-
-            if (fraction.Count > 0)
-                fractionString = "." + arithmeticService.ListIntToString(fraction);
-
-            return arithmeticService.ListIntToString(integral) + fractionString;
-        }
-
-        private string DoSumTwoNegativeNumber(BigNumberString firstNumberString, BigNumberString secondNumberString)
-        {
-            /*
-             * Sum of two negative number means sum of those number and minus sign in the beginning
-             * */
-            return "-" + DoSumTwoPositiveNumber(firstNumberString, secondNumberString);
-        }
-
-        private string DoSumOnePositiveOneNegativeNumber(BigNumberString positiveNumberString, BigNumberString negativeNumberString)
+        public string DoTheSum(BigNumberString firstbigNumberString, BigNumberString secondBigNumberString)
         {
             /*
              * positive number + negative number
@@ -86,12 +27,25 @@ namespace BigNumberCalculatorService
             // Variables
             int carry = 0;
             string fractionString = string.Empty;
+            BigNumberString negativeNumberString;
+            BigNumberString positiveNumberString;
 
+            if (firstbigNumberString.IsNegative)
+            {
+                negativeNumberString = firstbigNumberString;
+                positiveNumberString = secondBigNumberString;
+            }
+            else
+            {
+                positiveNumberString = firstbigNumberString;
+                negativeNumberString = secondBigNumberString;
+            }
+            
             // before we do 9's complement of negative number we must check if it has digit equals to or greater then positive counter part
             // else it end up wrong answer
             // if it is fractional add zero at end
             // if it is integral add zero at beginning
-            if (positiveNumberString.FractionalPartDigitList.Count> negativeNumberString.FractionalPartDigitList.Count)
+            if (positiveNumberString.FractionalPartDigitList.Count > negativeNumberString.FractionalPartDigitList.Count)
             {
                 foreach (var i in Enumerable.Range(0, positiveNumberString.FractionalPartDigitList.Count - negativeNumberString.FractionalPartDigitList.Count))
                 {
