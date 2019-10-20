@@ -39,8 +39,8 @@ namespace BigNumberCalculator
                 app.UseDeveloperExceptionPage();
             }
 
-            if (!context.Database.CanConnect())
-                context.Database.EnsureCreated();
+            //context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             app.UseMvc();
         }
