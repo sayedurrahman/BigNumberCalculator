@@ -23,10 +23,9 @@ class FetchData extends Component {
   render() {
     return (
       <div>
-        <h1>Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+        <h1>Number Calculations</h1>
+        <p>Fetching data from the server</p>
         {renderForecastsTable(this.props)}
-        {renderPagination(this.props)}
       </div>
     );
   }
@@ -37,20 +36,22 @@ function renderForecastsTable(props) {
     <table className='table table-striped'>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Temp. (C)</th>
-          <th>Temp. (F)</th>
-          <th>Summary</th>
+            <th>Calculation Date</th>
+            <th>User Name</th>
+            <th>Big Number 1</th>
+            <th>Big Number 2</th>
+            <th>Sum</th>
         </tr>
       </thead>
       <tbody>
         {props.forecasts.map(forecast =>
-          <tr key={forecast.dateFormatted}>
-            <td>{forecast.dateFormatted}</td>
-            <td>{forecast.temperatureC}</td>
-            <td>{forecast.temperatureF}</td>
-            <td>{forecast.summary}</td>
-          </tr>
+        <tr key={forecast.calculationDate}>
+                <td>{forecast.calculationDate.toLocaleString('en-us')}</td>
+            <td>{forecast.userName}</td>
+            <td>{forecast.bigNumber1}</td>
+            <td>{forecast.bigNumber2}</td>
+            <td>{forecast.sum}</td>
+        </tr>
         )}
       </tbody>
     </table>

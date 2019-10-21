@@ -11,7 +11,7 @@ export const actionCreators = {
 
     dispatch({ type: requestWeatherForecastsType, startDateIndex });
 
-    const url = `api/SampleData/WeatherForecasts?startDateIndex=${startDateIndex}`;
+    const url = 'http://localhost:5001/api/Result';
     const response = await fetch(url);
     const forecasts = await response.json();
 
