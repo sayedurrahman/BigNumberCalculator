@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigNumberCalculatorRepository
+namespace BigNumberCalculator.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

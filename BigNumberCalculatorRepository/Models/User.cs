@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigNumberCalculatorRepository.Models
+namespace BigNumberCalculator.Repository.Models
 {
     public class User
     {

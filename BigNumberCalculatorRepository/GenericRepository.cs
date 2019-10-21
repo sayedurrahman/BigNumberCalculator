@@ -1,18 +1,15 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BigNumberCalculatorRepository
+namespace BigNumberCalculator.Repository
 {
-    public class BigNumberRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly BigDataContext _context;
-        public BigNumberRepository(BigDataContext context)
+        public GenericRepository(BigDataContext context)
         {
             _context = context;
         }
-        //private readonly CHSRContext _context;
 
         public IEnumerable<T> GetAll()
         {
