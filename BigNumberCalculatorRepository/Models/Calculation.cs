@@ -11,6 +11,7 @@ namespace BigNumberCalculator.Repository.Models
         public string BigNumber1 { get; set; }
         public string BigNumber2 { get; set; }
         public string Sum { get; set; }
+        public DateTime CalculationDate { get; set; }
 
         public User User { get; set; }
     }

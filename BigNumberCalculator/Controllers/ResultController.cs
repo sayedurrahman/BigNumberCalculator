@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using BigNumberCalculator.Core;
+using BigNumberCalculator.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BigNumberCalculator.Controllers
 {
@@ -10,11 +10,18 @@ namespace BigNumberCalculator.Controllers
     [ApiController]
     public class ResultController : ControllerBase
     {
+        private readonly ICoreService CoreService;
+        public ResultController(ICoreService CoreService)
+        {
+            this.CoreService = CoreService;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<List<UserCalculation>> Get()
         {
-            return new string[] { "value1", "value2" };
+            //CoreService.
+            return CoreService.GetAllCalculation();
         }
     }
 }

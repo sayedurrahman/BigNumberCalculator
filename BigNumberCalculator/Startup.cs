@@ -29,6 +29,8 @@ namespace BigNumberCalculator
             services.AddScoped<ICoreService, CoreService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<UserRepository, UserRepository>();
+            services.AddScoped<UserCalculatorRepository, UserCalculatorRepository>();
+            
 
             // Setup connection string and configure for all pc/host
             string connectionString = Configuration.GetConnectionString("DefaultConnection").Replace("%CONTENTROOTPATH%", _contentRootPath);
