@@ -48,6 +48,12 @@ namespace BigNumberCalculator
 
             context.Database.EnsureCreated();
 
+            app.UseCors(builder => builder
+                       .AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials());
+
             app.UseMvc();
         }
     }
