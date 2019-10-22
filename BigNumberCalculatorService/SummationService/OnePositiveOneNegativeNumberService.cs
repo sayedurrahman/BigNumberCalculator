@@ -21,6 +21,7 @@ namespace BigNumberCalculator.Core.SummationService
              * = positive number + 9's complement of negative number
              * if result has a carry, add the carry with the result, this is the final result and result is a positive number
              * if result do not has a carry, do the 9's complement on result, this is the final result and result is a Negative Number
+             * if result has a carry and result has decimal part, add the carry with the last digit of the result, this is the final result and result is a positive number
              * https://www.geeksforgeeks.org/9s-complement-decimal-number/
              * */
 
@@ -75,9 +76,17 @@ namespace BigNumberCalculator.Core.SummationService
             {
                 // add carry with integral, means result is possitive
 
-                integral = arithmeticService.AdditionOfIntegralPart(integral, new List<int>(), ref carry);
                 if (fraction.Count > 0)
+                {
+                    // if result has a carry and result has decimal part, add the carry with the last digit of fractional part
+                    // this is the final result and result is a positive number
+                    fraction = arithmeticService.AdditionOfIntegralPart(fraction, new List<int>(), ref carry);
                     fractionString = "." + arithmeticService.ListIntToString(fraction).TrimEnd('0');
+                }
+                else
+                {
+                    integral = arithmeticService.AdditionOfIntegralPart(integral, new List<int>(), ref carry);
+                }
 
                 return arithmeticService.ListIntToString(integral).TrimStart('0') + fractionString;
             }
