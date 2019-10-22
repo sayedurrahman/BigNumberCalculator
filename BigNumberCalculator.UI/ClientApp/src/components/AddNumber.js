@@ -1,7 +1,5 @@
 import React from "react";
-//import { connect } from "react-redux";
 import axios from 'axios';
-//import { addNumber } from "../store/AddNumber";
 
 class AddNumber extends React.Component {
     constructor(props) {
@@ -20,22 +18,35 @@ class AddNumber extends React.Component {
             this.state)
             .then(response => { console.log(response) })
             .catch(error => { console.log(error) })
+        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ userName: '', firstNumber: '', secondNumber: '' })
     }
 
     render() {
         const { userName, firstNumber, secondNumber } = this.state
         return (
             <div>
+                <h1>Do the Math!</h1>
                 <form onSubmit={this.submitHandler}>
-                    <input type="text" name="userName" value={userName} onChange={this.changeHandler} />
-                    <input type="text" name="firstNumber" value={firstNumber} onChange={this.changeHandler}  />
-                    <input type="text" name="secondNumber" value={secondNumber} onChange={this.changeHandler}  />
-
-                    <button type="submit">Add Number</button>
-
-                    <strong>Value1: {this.state.userName}</strong>
-                    <strong>Value2: {this.state.firstNumber}</strong>
-                    <strong>Value3: {this.state.secondNumber}</strong>
+                    <p>
+                    <label>                            User Name:</label><br />
+                        <input type="text" name="userName" value={userName} onChange={this.changeHandler} className="form-control" />
+                    
+                    </p>
+                    <p>
+                        <label>
+                            First Number:</label><br />
+                        <input type="text" name="firstNumber" value={firstNumber} onChange={this.changeHandler} className="form-control" />
+                    </p>
+                    <p>
+                        <label>
+                            Second Number:</label><br />
+                        <input type="text" name="secondNumber" value={secondNumber} onChange={this.changeHandler} className="form-control" />
+                    </p>
+                    
+                    <p>
+                        <button className="btn btn-primary" type="submit">Add Number</button>
+                    </p>
                 </form>
             </div>
         );

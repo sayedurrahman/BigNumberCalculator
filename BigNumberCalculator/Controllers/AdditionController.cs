@@ -15,19 +15,14 @@ namespace BigNumberCalculator.Controllers
             this.CoreService = CoreService;
         }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            CoreService.CalculateAndStore("1", "1", "Sayedur");
-
-            return new JsonResult("Ok");
-        }
-
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] CalculationModel dataModel)
+        public ActionResult Post([FromBody] CalculationModel dataModel)
         {
-            CoreService.CalculateAndStore(dataModel.firstNumber, dataModel.secondNumber, dataModel.userName);
+            if (dataModel != null)
+                CoreService.CalculateAndStore(dataModel.firstNumber, dataModel.secondNumber, dataModel.userName);
+
+            return Ok();
         }
     }
 }
