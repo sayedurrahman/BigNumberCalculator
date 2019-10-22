@@ -10,7 +10,7 @@ Big Number Calculator
     Set Start action for projects 'BigNumberCalculator' and 'BigNumberCalculator.UI
     Click Apply
 
-3. To run test cases use test explorer. There are 90 test cases, which covers following logics for sum.
+3. To run test cases use test explorer. There are 90 test cases, which cover following logics for sum.
 - Both numbers are positive
 - Both numbers are negative
 - one number is larger positive and other smaller negative
@@ -29,3 +29,7 @@ Big Number Calculator
 5. Calculation is not done by single function or complex algorithm. There is no complex function. Calculation logics are distributed in different classes, namely TwoPositiveNumberService, TwoNegativeNumberService and OnePositiveOneNegativeNumberService. Factory pattern is used to simplify the calculation. 
 
 6. To connect DB and services I used repository layer with ef core and code first approch is used. Fluent API is used to increase readability
+
+7. To add some calculation in the db load this URL miltiple times. '/api/addition/get'. This will insert some dummy data.
+
+8. React with redux is used in front end.
