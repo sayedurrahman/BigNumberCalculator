@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { actionCreators } from '../store/WeatherForecasts';
+import { actionCreators } from '../store/calculatedDatas';
 
 class FetchData extends Component {
   componentDidMount() {
@@ -56,17 +56,6 @@ function renderForecastsTable(props) {
       </tbody>
     </table>
   );
-}
-
-function renderPagination(props) {
-  const prevStartDateIndex = (props.startDateIndex || 0) - 5;
-  const nextStartDateIndex = (props.startDateIndex || 0) + 5;
-
-  return <p className='clearfix text-center'>
-    <Link className='btn btn-default pull-left' to={`/fetch-data/${prevStartDateIndex}`}>Previous</Link>
-    <Link className='btn btn-default pull-right' to={`/fetch-data/${nextStartDateIndex}`}>Next</Link>
-    {props.isLoading ? <span>Loading...</span> : []}
-  </p>;
 }
 
 export default connect(
