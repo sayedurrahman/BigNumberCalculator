@@ -14,6 +14,14 @@ namespace BigNumberCalculator.Controllers
             this.CoreService = CoreService;
         }
 
+        [HttpGet]
+        public ActionResult Get()
+        {
+            CoreService.CalculateAndStore("1", "1", "Sayedur");
+
+            return new JsonResult("Ok");
+        }
+
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string firstNumber, string secondNumber, string userName)
