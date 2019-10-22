@@ -1,21 +1,16 @@
 const requestWeatherForecastsType = 'REQUEST_WEATHER_FORECASTS';
 const receiveWeatherForecastsType = 'RECEIVE_WEATHER_FORECASTS';
-const initialState = { forecasts: [], isLoading: false };
+const initialState = { datas: [], isLoading: false };
 
 export const actionCreators = {
-  requestWeatherForecasts: startDateIndex => async (dispatch, getState) => {
-    if (startDateIndex === getState().weatherForecasts.startDateIndex) {
-      // Don't issue a duplicate request (we already have or are loading the requested data)
-      return;
-    }
-
-    dispatch({ type: requestWeatherForecastsType, startDateIndex });
+  requestWeatherForecasts: () => async (dispatch, getState) => {
+    dispatch({ type: requestWeatherForecastsType });
 
     const url = 'http://localhost:62007/api/Result';
     const response = await fetch(url);
-    const forecasts = await response.json();
+    const datas = await response.json();
 
-    dispatch({ type: receiveWeatherForecastsType, startDateIndex, forecasts });
+    dispatch({ type: receiveWeatherForecastsType, datas });
   }
 };
 
@@ -34,7 +29,7 @@ export const reducer = (state, action) => {
     return {
       ...state,
       startDateIndex: action.startDateIndex,
-      forecasts: action.forecasts,
+        datas: action.datas,
       isLoading: false
     };
   }

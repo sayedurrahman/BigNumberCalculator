@@ -16,8 +16,7 @@ class FetchData extends Component {
   }
 
   ensureDataFetched() {
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
+    this.props.requestWeatherForecasts();
   }
 
   render() {
@@ -25,13 +24,13 @@ class FetchData extends Component {
       <div>
         <h1>Number Calculations</h1>
         <p>Fetching data from the server</p>
-        {renderForecastsTable(this.props)}
+        {renderCalculatedTable(this.props)}
       </div>
     );
   }
 }
 
-function renderForecastsTable(props) {
+function renderCalculatedTable(props) {
   return (
     <table className='table table-striped'>
       <thead>
@@ -44,7 +43,7 @@ function renderForecastsTable(props) {
         </tr>
       </thead>
       <tbody>
-        {props.forecasts.map(forecast =>
+              {props.datas.map(forecast =>
         <tr key={forecast.calculationDate}>
                 <td>{forecast.calculationDate.toLocaleString('en-us')}</td>
             <td>{forecast.userName}</td>
