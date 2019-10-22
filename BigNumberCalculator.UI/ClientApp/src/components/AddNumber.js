@@ -1,39 +1,45 @@
 import React from "react";
-import { connect } from "react-redux";
-import { addNumber } from "../store/AddNumber";
+//import { connect } from "react-redux";
+import axios from 'axios';
+//import { addNumber } from "../store/AddNumber";
 
 class AddNumber extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { input: "" };
+        this.state = { userName: '', firstNumber: '', secondNumber: '' };
     }
 
-    updateInput = input => {
-        this.setState({ input });
-    };
+    changeHandler = e => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
 
-    handleAddNumber = () => {
-        this.props.addNumber(this.state.input);
-        this.setState({ input: "" });
-    };
+    submitHandler = e => {
+        e.preventDefault();
+        axios.post(
+            'http://localhost:62007/api/Addition',
+            this.state)
+            .then(response => { console.log(response) })
+            .catch(error => { console.log(error) })
+    }
 
     render() {
+        const { userName, firstNumber, secondNumber } = this.state
         return (
             <div>
-                <input
-                    onChange={e => this.updateInput(e.target.value)}
-                    value={this.state.input}
-                />
-                <button className="add-todo" onClick={this.handleAddNumber}>
-                    Add Number
-        </button>
+                <form onSubmit={this.submitHandler}>
+                    <input type="text" name="userName" value={userName} onChange={this.changeHandler} />
+                    <input type="text" name="firstNumber" value={firstNumber} onChange={this.changeHandler}  />
+                    <input type="text" name="secondNumber" value={secondNumber} onChange={this.changeHandler}  />
+
+                    <button type="submit">Add Number</button>
+
+                    <strong>Value1: {this.state.userName}</strong>
+                    <strong>Value2: {this.state.firstNumber}</strong>
+                    <strong>Value3: {this.state.secondNumber}</strong>
+                </form>
             </div>
         );
     }
 }
 
-export default connect(
-    null,
-    { addNumber }
-)(AddNumber);
-// export default AddNumber;
+export default AddNumber;

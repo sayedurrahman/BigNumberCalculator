@@ -1,5 +1,6 @@
 ﻿
 using BigNumberCalculator.Core;
+using BigNumberCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BigNumberCalculator.Controllers
@@ -24,9 +25,9 @@ namespace BigNumberCalculator.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string firstNumber, string secondNumber, string userName)
+        public void Post([FromBody] CalculationModel dataModel)
         {
-            CoreService.CalculateAndStore(firstNumber, secondNumber, userName);
+            CoreService.CalculateAndStore(dataModel.firstNumber, dataModel.secondNumber, dataModel.userName);
         }
     }
 }
