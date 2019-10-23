@@ -24,12 +24,14 @@ Big Number Calculator
 - sum of integral parts of two numbers with carry
 - convertion of 9's complement
 
+Known issue:
+- 5.5 - 2.5 = 3, but result will be 3.0
+- if expected result is 0, test fails because result is 0.0
+
 4. I used 9's complement to subtract number.https://www.youtube.com/watch?v=UVh9T2_w_PQ
 
 5. Calculation is not done by single function or complex algorithm. There is no complex function. Calculation logics are distributed in different classes, namely TwoPositiveNumberService, TwoNegativeNumberService and OnePositiveOneNegativeNumberService. Factory pattern is used to simplify the calculation. 
 
 6. To connect DB and services I used repository layer with ef core and code first approch is used. Fluent API is used to increase readability
 
-7. To add some calculation in the db load this URL miltiple times. '/api/addition/get'. This will insert some dummy data.
-
-8. React with redux is used in front end.
+7. React with redux is used in front end. For sum store redux is not required so I only used react. For calculation list I used react with redux
