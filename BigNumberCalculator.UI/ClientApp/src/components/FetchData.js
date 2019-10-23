@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { actionCreators } from '../store/calculatedDatas';
 
 class FetchData extends Component {
@@ -16,7 +15,7 @@ class FetchData extends Component {
   }
 
   ensureDataFetched() {
-    this.props.requestWeatherForecasts();
+    this.props.requestData();
   }
 
   render() {
@@ -43,13 +42,13 @@ function renderCalculatedTable(props) {
         </tr>
       </thead>
       <tbody>
-              {props.datas.map(forecast =>
-        <tr key={forecast.calculationDate}>
-                <td>{forecast.calculationDate.toLocaleString('en-us')}</td>
-            <td>{forecast.userName}</td>
-            <td>{forecast.bigNumber1}</td>
-            <td>{forecast.bigNumber2}</td>
-            <td>{forecast.sum}</td>
+              {props.datas.map(data =>
+        <tr key={data.calculationDate}>
+            <td>{data.calculationDate.toLocaleString('en-us')}</td>
+            <td>{data.userName}</td>
+            <td>{data.bigNumber1}</td>
+            <td>{data.bigNumber2}</td>
+            <td>{data.sum}</td>
         </tr>
         )}
       </tbody>
@@ -58,6 +57,6 @@ function renderCalculatedTable(props) {
 }
 
 export default connect(
-  state => state.weatherForecasts,
+    state => state.calculatedDatas,
   dispatch => bindActionCreators(actionCreators, dispatch)
 )(FetchData);

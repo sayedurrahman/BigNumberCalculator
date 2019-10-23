@@ -1,34 +1,33 @@
-const requestWeatherForecastsType = 'REQUEST_WEATHER_FORECASTS';
-const receiveWeatherForecastsType = 'RECEIVE_WEATHER_FORECASTS';
+const requestDataType = 'REQUEST_DATA';
+const receiveDataType = 'RECEIVE_DATA';
 const initialState = { datas: [], isLoading: false };
 
 export const actionCreators = {
-  requestWeatherForecasts: () => async (dispatch, getState) => {
-    dispatch({ type: requestWeatherForecastsType });
+  requestData: () => async (dispatch, getState) => {
+    dispatch({ type: requestDataType });
+    dispatch({ type: requestDataType });
 
     const url = 'http://localhost:62007/api/Result';
     const response = await fetch(url);
     const datas = await response.json();
 
-    dispatch({ type: receiveWeatherForecastsType, datas });
+    dispatch({ type: receiveDataType, datas });
   }
 };
 
 export const reducer = (state, action) => {
   state = state || initialState;
 
-  if (action.type === requestWeatherForecastsType) {
+  if (action.type === requestDataType) {
     return {
       ...state,
-      startDateIndex: action.startDateIndex,
       isLoading: true
     };
   }
 
-  if (action.type === receiveWeatherForecastsType) {
+  if (action.type === receiveDataType) {
     return {
       ...state,
-      startDateIndex: action.startDateIndex,
         datas: action.datas,
       isLoading: false
     };
