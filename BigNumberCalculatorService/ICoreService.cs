@@ -7,6 +7,6 @@ namespace BigNumberCalculator.Core
     {
         List<UserCalculation> GetAllCalculation();
         string CalculateSum(string firstNumber, string secondNumber);
-        void CalculateAndStore(string firstNumber, string secondNumber, string userName);
+        string CalculateAndStore(string firstNumber, string secondNumber, string userName);
     }
 }

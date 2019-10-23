@@ -17,12 +17,13 @@ namespace BigNumberCalculator.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] CalculationModel dataModel)
+        public ActionResult<string> Post([FromBody] CalculationModel dataModel)
         {
+            string result = "";
             if (dataModel != null)
-                CoreService.CalculateAndStore(dataModel.firstNumber, dataModel.secondNumber, dataModel.userName);
+                result = CoreService.CalculateAndStore(dataModel.firstNumber, dataModel.secondNumber, dataModel.userName);
 
-            return Ok();
+            return result;
         }
     }
 }

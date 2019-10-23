@@ -33,12 +33,14 @@ namespace BigNumberCalculator.Core
                 }).ToList();
         }
 
-        public void CalculateAndStore(string firstNumber, string secondNumber, string userName)
+        public string CalculateAndStore(string firstNumber, string secondNumber, string userName)
         {
             string result = CalculateSum(firstNumber, secondNumber);
             User user = GetUserByUserName(userName);
             Calculation calculation = new Calculation { User = user, BigNumber1 = firstNumber, BigNumber2 = secondNumber, Sum = result, CalculationDate = System.DateTime.Now };
             calculationRepository.Insert(calculation);
+
+            return result;
         }
 
         public User GetUserByUserName(string userName)
